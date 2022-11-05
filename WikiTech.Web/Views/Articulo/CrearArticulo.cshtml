@@ -1,0 +1,44 @@
+﻿
+
+@{
+}
+<h1>Crear un nuevo artículo</h1>
+
+<form class="row g-3" method="post" action="/articulo/CrearArticulo">
+    <div class="col-md-6">
+        <label for="Titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" id="Titulo" name="Titulo" autofocus>
+    </div>
+    <div class="col-md-3">
+        <label for="Fecha" class="form-label">Fecha</label>
+        <input type="datetime" class="form-control" id="Fecha" name="Fecha">
+    </div>
+    <div class="col-12">
+        <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
+        <textarea id="Contenido" name="Contenido" rows="7" cols="65">
+        </textarea>
+    </div>
+    <div class="col-5">
+        <label for="ImagenPrincipal" class="form-label">URL de Imagen</label>
+        <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal">
+    </div>
+   @* <div class="col-md-4">
+        <label for="Categoria" class="form-label">Categoría</label>
+        <input type="text" class="form-control" id="Categoria" name="IdCategoria">
+    </div>*@
+    <div class="dropdown col-md-3">
+        <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Elegir categoría
+        </a>
+
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">General</a></li>
+            <li><a class="dropdown-item" href="#">Programación</a></li>
+            <li><a class="dropdown-item" href="#">Hardware</a></li>
+        </ul>
+    </div>
+    
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary btn-lg">Guardar artículo</button>
+    </div>
+</form>

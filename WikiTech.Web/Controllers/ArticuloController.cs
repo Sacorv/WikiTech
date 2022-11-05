@@ -35,6 +35,27 @@ namespace WikiTech.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CrearArticulo(Articulo articulo)
+        {
+            _articuloServicio.GuardarArticulo(articulo);
+
+            Thread.Sleep(400);
+
+            return RedirectToAction("ListarArticulos");
+        }
+
+
+        public IActionResult EliminarArticulo(int id)
+        {
+            _articuloServicio.EliminarArticulo(id);
+
+            Thread.Sleep(400);
+
+            return RedirectToAction("ListarArticulos");
+        }
+
+
         public IActionResult Modificar()
         {
             return View();
