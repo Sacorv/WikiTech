@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using WikiTech.Entidades;
 using WikiTech.Logica;
+
 
 namespace WikiTech.Web.Controllers
 {
@@ -20,11 +22,15 @@ namespace WikiTech.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(Usuario usuario)
+        public async Task<IActionResult> LoginAsync(Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                _IAccesoServicio.Login(usuario);
+                string tokenString = await _IAccesoServicio.LoginAsync(usuario);
+                // variable de sesion guardada en cookie para usarse configure program.cs
+                HttpContext.Session.SetString("token", tokenString);
+                // para obtener el token usar esto
+                // HttpContext.Session.GetString("token");
 
                 return Redirect("/Home/Index");
             }
@@ -38,6 +44,21 @@ namespace WikiTech.Web.Controllers
         public IActionResult Registrar()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult Registrar(Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+                _IAccesoServicio.Registrarse(usuario);
+
+                return Redirect("/Home/Index");
+            }
+            else
+            {
+            return View(usuario);
+
+            }
         }
     }
 }
