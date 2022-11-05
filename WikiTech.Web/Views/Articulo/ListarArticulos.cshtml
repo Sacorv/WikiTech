@@ -1,0 +1,39 @@
+﻿
+
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4 mb-3 mt-2">WikiTech</h1>
+    <div class="w-50 m-auto">
+        <h4 class="display-6 fs-4 mb-3">Bienvenido a la wiki tecnológica!</h4>
+        <p>En WikiTech vas a poder crear tus propios artículos para compartir tus conocimientos con los demás colaboradores y usuarios</p>
+    </div>
+</div>
+
+ 
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-5">
+    @foreach (var articulo in ViewBag.Articulos)
+    {
+        <a href="/Articulo/VerArticulo/@articulo.id" style="text-decoration:none; color: black">
+            <div class="col">
+                <div class=card h-100" style="max-width: 88%">
+                    <img src="@articulo.ImagenPrincipal" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <input type="hidden" >@articulo.id
+
+                        <h5 class="card-title">@articulo.Titulo</h5>
+                        <p class="card-text" style="white-space:nowrap;text-overflow: ellipsis;white-space: wrap;overflow: hidden;">@articulo.Contenido</p>
+                        <p>@articulo.Fecha</p>
+                        @*<p>@articulo.Puntaje</p>
+                        <p>@articulo.IdColaborador</p>
+                        <p>@articulo.IdCategoria</p>*@
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+    
+
+

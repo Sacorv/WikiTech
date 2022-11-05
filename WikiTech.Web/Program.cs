@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IAccesoServicio, AccesoServicio>();
+builder.Services.AddSingleton<IArticuloServicio, ArticuloServicio>();
 
 var app = builder.Build();
 
@@ -26,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Articulo}/{action=ListarArticulos}/{id?}");
 
 app.Run();
