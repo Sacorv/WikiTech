@@ -19,6 +19,8 @@ namespace WikiTech.Logica
         Task<bool> GuardarArticulo(Articulo articulo);
 
         Task<bool> EliminarArticulo(int id);
+
+        Task<List<Categoria>> ObtenerCategorias();
     }
 
     public class ArticuloServicio : IArticuloServicio
@@ -71,7 +73,6 @@ namespace WikiTech.Logica
 
         public async Task<bool> GuardarArticulo(Articulo articulo)
         {
-            articulo.IdCategoria = 1;
             articulo.IdColaborador = 2;
             bool guardado = false;
             string endpoint = "https://localhost:7164/api/articulo";
@@ -111,6 +112,27 @@ namespace WikiTech.Logica
             }
 
             return eliminado;
+        }
+
+        public async Task<List<Categoria>> ObtenerCategorias()
+        {
+            List<Categoria> categorias = new List<Categoria>();
+
+            var endpoint = "https://localhost:7164/api/articulo/categorias";
+            JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+
+            using (var httpClient = new HttpClient())
+            {
+                var response = await httpClient.GetAsync(endpoint);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var json_res = await response.Content.ReadAsStringAsync();
+                    var res = JsonSerializer.Deserialize<List<Categoria>>(json_res, options);
+                    categorias = res;
+                }
+            }
+            return categorias;
         }
     }
 }

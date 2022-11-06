@@ -30,9 +30,11 @@ namespace WikiTech.Web.Controllers
         }
 
 
-        public IActionResult CrearArticulo()
+        public async Task<IActionResult> CrearArticulo()
         {
-            return View();
+            List<Categoria> categorias = await _articuloServicio.ObtenerCategorias();
+
+            return View(categorias);
         }
 
         [HttpPost]

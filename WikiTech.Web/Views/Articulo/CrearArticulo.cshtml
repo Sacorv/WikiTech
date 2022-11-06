@@ -1,4 +1,4 @@
-﻿
+﻿@model List<WikiTech.Entidades.Categoria>
 
 @{
 }
@@ -15,30 +15,25 @@
     </div>
     <div class="col-12">
         <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
-        <textarea id="Contenido" name="Contenido" rows="7" cols="65">
+        <textarea id="Contenido" name="Contenido" rows="6" cols="70">
         </textarea>
     </div>
     <div class="col-5">
         <label for="ImagenPrincipal" class="form-label">URL de Imagen</label>
         <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal">
     </div>
-   @* <div class="col-md-4">
-        <label for="Categoria" class="form-label">Categoría</label>
-        <input type="text" class="form-control" id="Categoria" name="IdCategoria">
-    </div>*@
-    <div class="dropdown col-md-3">
-        <a class="btn btn-info dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Elegir categoría
-        </a>
+    
+    <select class="form-select w-25" aria-label="Default select example" name="IdCategoria">
+        <option selected>Elegir categoria</option>
 
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">General</a></li>
-            <li><a class="dropdown-item" href="#">Programación</a></li>
-            <li><a class="dropdown-item" href="#">Hardware</a></li>
-        </ul>
-    </div>
+        @foreach (var categoria in Model)
+        {
+            <option value="@categoria.idCategoria">@categoria.Nombre</option>
+        }
+    </select>
     
     <div class="col-12">
+        <a class="btn btn-secondary btn-lg" style="width:180px" href="/articulo/ListarArticulos" role="button">Volver</a>
         <button type="submit" class="btn btn-primary btn-lg">Guardar artículo</button>
     </div>
 </form>
