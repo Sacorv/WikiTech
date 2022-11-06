@@ -1,7 +1,9 @@
 ﻿using MicroservicioWiki.Data.Dtos;
 using MicroservicioWiki.Data.Entidades;
 using MicroservicioWiki.Logica;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Microservicio.Wiki.Controllers
 {
@@ -41,7 +43,7 @@ namespace Microservicio.Wiki.Controllers
             return new OkObjectResult(articuloBuscado);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(ArticuloDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
@@ -53,7 +55,7 @@ namespace Microservicio.Wiki.Controllers
             return new CreatedResult("https://localhost:7164",creado);
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
@@ -72,7 +74,7 @@ namespace Microservicio.Wiki.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ArticuloDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
@@ -82,12 +84,14 @@ namespace Microservicio.Wiki.Controllers
             throw new NotImplementedException();
         }
 
+        [Authorize]
         [HttpGet("categorias")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CategoriaDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
         public async Task<List<CategoriaDto>> ObtenerCategorias()
         {
-            return await _IArticuloServicio.ObtenerCategorias();
+
+            return await _IArticuloServicio.ObtenerCategorias(); ;
         }
 
     }
