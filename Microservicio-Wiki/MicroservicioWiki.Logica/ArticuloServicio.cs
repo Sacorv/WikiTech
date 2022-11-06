@@ -23,9 +23,7 @@ namespace MicroservicioWiki.Logica
 
         Task<bool> Eliminar(Articulo articulo);
 
-        Task<ArticuloDto> ConvertirADto(Articulo articulo);
-
-        Task<Articulo> ConvertirAEntidad(CrearArticuloDto articuloDTO);
+        Task<List<CategoriaDto>> ObtenerCategorias();
 
     }
 
@@ -43,13 +41,13 @@ namespace MicroservicioWiki.Logica
         {
             Articulo articuloBuscado = await _context.Articulos.FindAsync(IdArticulo);
 
-            return await ConvertirADto(articuloBuscado);
+            return await ConvertirArticuloADto(articuloBuscado);
         }
 
 
         public async Task<Articulo> Crear(CrearArticuloDto articulo)
         {
-            Articulo nuevoArticulo = await ConvertirAEntidad(articulo);
+            Articulo nuevoArticulo = await ConvertirArticuloDTOAEntidad(articulo);
 
             EntityEntry<Articulo> response = await _context.Articulos.AddAsync(nuevoArticulo);
 
@@ -64,11 +62,14 @@ namespace MicroservicioWiki.Logica
 
             List<ArticuloDto> DTOs = new List<ArticuloDto>();
 
-            foreach (Articulo articulo in articulos)
+            if(articulos != null)
             {
-                DTOs.Add(await ConvertirADto(articulo));
-            }
+                foreach (Articulo articulo in articulos)
+                {
+                    DTOs.Add(await ConvertirArticuloADto(articulo));
+                }
 
+            }
             return DTOs;
         }
 
@@ -93,8 +94,25 @@ namespace MicroservicioWiki.Logica
             return articuloBuscado;
         }
 
+        public async Task<List<CategoriaDto>> ObtenerCategorias()
+        {
+            List<Categorium> categorias = await _context.Categoria.OrderBy(c => c.Nombre).ToListAsync();
 
-        public async Task<ArticuloDto> ConvertirADto(Articulo articulo)
+            List<CategoriaDto> categoriasDTO = new List<CategoriaDto>();
+
+            if (categorias != null)
+            {
+                foreach (Categorium categoria in categorias)
+                {
+                    categoriasDTO.Add(await ConvertirCategoriaADto(categoria));
+                }
+            }
+
+            return categoriasDTO;
+        }
+
+
+        private async Task<ArticuloDto> ConvertirArticuloADto(Articulo articulo)
         {
             ArticuloDto articuloDTO = new ArticuloDto();
 
@@ -111,7 +129,7 @@ namespace MicroservicioWiki.Logica
         }
 
 
-        public async Task<Articulo> ConvertirAEntidad(CrearArticuloDto articuloDTO)
+        private async Task<Articulo> ConvertirArticuloDTOAEntidad(CrearArticuloDto articuloDTO)
         {
             Articulo nuevoArticulo = new Articulo();
             nuevoArticulo.Titulo = articuloDTO.Titulo;
@@ -125,6 +143,14 @@ namespace MicroservicioWiki.Logica
             return nuevoArticulo;
         }
 
-        
+        private async Task<CategoriaDto> ConvertirCategoriaADto(Categorium categoria)
+        {
+            CategoriaDto categoriaDTO = new CategoriaDto();
+            categoriaDTO.IdCategoria = categoria.IdCategoria;
+            categoriaDTO.Nombre = categoria.Nombre;
+
+            return categoriaDTO;
+        }
+
     }
 }

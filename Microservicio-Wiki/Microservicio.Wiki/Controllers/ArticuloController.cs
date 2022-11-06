@@ -82,6 +82,13 @@ namespace Microservicio.Wiki.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpGet("categorias")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CategoriaDto>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
+        public async Task<List<CategoriaDto>> ObtenerCategorias()
+        {
+            return await _IArticuloServicio.ObtenerCategorias();
+        }
 
     }
 }
