@@ -84,6 +84,7 @@ namespace Microservicio.Wiki.Controllers
             throw new NotImplementedException();
         }
 
+        
         [Authorize]
         [HttpGet("categorias")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<CategoriaDto>))]
@@ -92,6 +93,26 @@ namespace Microservicio.Wiki.Controllers
         {
 
             return await _IArticuloServicio.ObtenerCategorias(); ;
+        }
+
+        [Authorize]
+        [HttpPost("colaborador")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ColaboradorDto>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
+
+        public async Task<bool> RegistrarColaborador(ColaboradorDto colaboradorDTO)
+        {
+            return await _IArticuloServicio.RegistrarColaborador(colaboradorDTO);
+
+        }
+
+        [Authorize]
+        [HttpGet("colaborador/{email}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ColaboradorDto>))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]
+        public async Task<ColaboradorDto> BuscarColaborador(string email)
+        {
+            return await _IArticuloServicio.BuscarColaboradorPorEmail(email);
         }
 
     }

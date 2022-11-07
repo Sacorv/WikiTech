@@ -18,6 +18,7 @@ namespace WikiTech.Web.Controllers
         public async Task<IActionResult> ListarArticulos()
         {
             ViewBag.Articulos = await _articuloServicio.ObtenerArticulos();
+            
 
             return View();
         }
@@ -32,7 +33,7 @@ namespace WikiTech.Web.Controllers
 
         public async Task<IActionResult> CrearArticulo()
         {
-            List<Categoria> categorias = await _articuloServicio.ObtenerCategorias();
+            List<Categoria> categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
 
             return View(categorias);
         }
@@ -40,9 +41,11 @@ namespace WikiTech.Web.Controllers
         [HttpPost]
         public IActionResult CrearArticulo(Articulo articulo)
         {
-            _articuloServicio.GuardarArticulo(articulo);
+            var sesion = HttpContext;
+            
+            _articuloServicio.GuardarArticulo(articulo, sesion);
 
-            Thread.Sleep(400);
+            Thread.Sleep(1300);
 
             return RedirectToAction("ListarArticulos");
         }
@@ -50,7 +53,8 @@ namespace WikiTech.Web.Controllers
 
         public IActionResult EliminarArticulo(int id)
         {
-            _articuloServicio.EliminarArticulo(id);
+            var sesion = HttpContext;
+            _articuloServicio.EliminarArticulo(id, sesion);
 
             Thread.Sleep(400);
 

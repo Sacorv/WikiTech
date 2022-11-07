@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
@@ -56,7 +57,9 @@ namespace WikiTech.Logica
         }
 
         public async void Registrarse(Usuario usuario)
-        {   
+        {
+            int statusCode = 0;
+
             string urlApi = $"https://localhost:7294/login/registeruser";
 
             using (var httpClient = new HttpClient())
@@ -70,8 +73,40 @@ namespace WikiTech.Logica
                 var respuesta = await httpClient.PostAsJsonAsync(urlApi, body);
                 //aca no me importa mucho la respuesta pero si quisiera usaria esa variable
 
+                statusCode = (int)respuesta.StatusCode;
+
+            }
+
+            if(statusCode == 200)
+            {
+                await GuardarColaborador(usuario);
             }
             
         }
+
+        public async Task<bool> GuardarColaborador(Usuario usuario)
+        {
+            bool guardado = false;
+
+            Colaborador colaborador = new Colaborador();
+            colaborador.Nombre = usuario.nombre;
+            colaborador.Apellido = usuario.apellido;
+            colaborador.Email = usuario.email;
+
+            string endpoint = "https://localhost:7164/api/articulo/colaborador";
+
+            JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+
+            using (var HttpClient = new HttpClient())
+            {
+                var response = await HttpClient.PostAsJsonAsync(endpoint, colaborador);
+                if (response.IsSuccessStatusCode)
+                {
+                    guardado = true;
+                }
+            }
+
+            return guardado;
+        } 
     }
 }

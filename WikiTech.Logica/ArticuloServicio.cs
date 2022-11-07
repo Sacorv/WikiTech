@@ -1,12 +1,19 @@
-﻿using System;
+﻿//using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WikiTech.Entidades;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
+using System.Net;
 
 namespace WikiTech.Logica
 {
@@ -16,11 +23,11 @@ namespace WikiTech.Logica
 
         Task<Articulo> BuscarArticulo(int id);
 
-        Task<bool> GuardarArticulo(Articulo articulo);
+        Task<bool> GuardarArticulo(Articulo articulo, HttpContext sesion);
 
-        Task<bool> EliminarArticulo(int id);
+        Task<bool> EliminarArticulo(int id, HttpContext sesion);
 
-        Task<List<Categoria>> ObtenerCategorias();
+        Task<List<Categoria>> ObtenerCategorias(HttpContext sesion);
     }
 
     public class ArticuloServicio : IArticuloServicio
@@ -71,9 +78,13 @@ namespace WikiTech.Logica
         }
 
 
-        public async Task<bool> GuardarArticulo(Articulo articulo)
+        public async Task<bool> GuardarArticulo(Articulo articulo, HttpContext sesion)
         {
-            articulo.IdColaborador = 2;
+            string email = sesion.Session.GetString("usuario");
+            string token = sesion.Session.GetString("token");
+
+            articulo.IdColaborador = await BuscarColaboradorPorEmail(email, sesion);
+
             bool guardado = false;
             string endpoint = "https://localhost:7164/api/articulo";
 
@@ -81,18 +92,20 @@ namespace WikiTech.Logica
 
             using(var HttpClient = new HttpClient())
             {
-                var response = await HttpClient.PostAsJsonAsync(endpoint, articulo);
-                if (response.IsSuccessStatusCode)
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                var response = await HttpClient.PostAsJsonAsync(endpoint,articulo);
+                if (response.StatusCode == HttpStatusCode.Created)
                 {
                     guardado = true;
                 }
             }
-
             return guardado;
         }
 
-        public async Task<bool> EliminarArticulo(int id)
+        public async Task<bool> EliminarArticulo(int id, HttpContext sesion)
         {
+            string token = sesion.Session.GetString("token");
+
             bool eliminado = false;
 
             if(BuscarArticulo(id) != null)
@@ -103,19 +116,21 @@ namespace WikiTech.Logica
 
                 using (var HttpClient = new HttpClient())
                 {
+                    HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",token);
                     var response = await HttpClient.DeleteAsync(endpoint);
-                    if (response.IsSuccessStatusCode)
+                    if (response.StatusCode == HttpStatusCode.OK)
                     {
                         eliminado = true;
                     }
                 }
             }
-
             return eliminado;
         }
 
-        public async Task<List<Categoria>> ObtenerCategorias()
+        public async Task<List<Categoria>> ObtenerCategorias(HttpContext sesion)
         {
+            string token = sesion.Session.GetString("token");
+
             List<Categoria> categorias = new List<Categoria>();
 
             var endpoint = "https://localhost:7164/api/articulo/categorias";
@@ -123,16 +138,41 @@ namespace WikiTech.Logica
 
             using (var httpClient = new HttpClient())
             {
-                var response = await httpClient.GetAsync(endpoint);
 
-                if (response.IsSuccessStatusCode)
+                using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, endpoint))
                 {
-                    var json_res = await response.Content.ReadAsStringAsync();
-                    var res = JsonSerializer.Deserialize<List<Categoria>>(json_res, options);
-                    categorias = res;
+                    requestMessage.Headers.Add("Authorization", "Bearer " + token);
+                    var resHeader = await httpClient.SendAsync(requestMessage);
+                    var json_resHeader = await resHeader.Content.ReadAsStringAsync();
+                    var responseHeader = JsonSerializer.Deserialize<List<Categoria>>(json_resHeader, options);
+                    categorias = responseHeader;
                 }
             }
             return categorias;
         }
+
+        private async Task<int> BuscarColaboradorPorEmail(string email, HttpContext sesion)
+        {
+            string token = sesion.Session.GetString("token");
+
+            string endpoint = $"https://localhost:7164/api/articulo/colaborador/{email}";
+            int buscado = 0;
+
+            JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+
+            using (var httpClient = new HttpClient())
+            {
+                using (var requestMessage = new HttpRequestMessage(HttpMethod.Get, endpoint))
+                {
+                    requestMessage.Headers.Add("Authorization", "Bearer " + token);
+                    var resHeader = await httpClient.SendAsync(requestMessage);
+                    var json_resHeader = await resHeader.Content.ReadAsStringAsync();
+                    var responseHeader = JsonSerializer.Deserialize<Colaborador>(json_resHeader, options);
+                    buscado = responseHeader.IdColaborador;
+                }
+            }
+            return buscado;
+        }
+
     }
 }

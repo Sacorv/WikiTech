@@ -25,6 +25,10 @@ namespace MicroservicioWiki.Logica
 
         Task<List<CategoriaDto>> ObtenerCategorias();
 
+        Task<bool> RegistrarColaborador(ColaboradorDto colaboradorDTO);
+
+        Task<ColaboradorDto> BuscarColaboradorPorEmail(string email);
+
     }
 
     public class ArticuloServicio : IArticuloServicio
@@ -111,6 +115,33 @@ namespace MicroservicioWiki.Logica
             return categoriasDTO;
         }
 
+        public async Task<bool> RegistrarColaborador(ColaboradorDto colaboradorDTO)
+        {
+            bool registrado = false;
+            Colaborador colaborador = await ConvertirColaboradorAEntidad(colaboradorDTO);
+
+            if (colaborador != null)
+            {
+                _context.Colaboradors.Add(colaborador);
+                _context.SaveChanges();
+                registrado = true;
+            }
+            return registrado;
+        }
+
+        public async Task<ColaboradorDto> BuscarColaboradorPorEmail(string email)
+        {
+            Colaborador colaborador = _context.Colaboradors.Where(c => c.Email == email).FirstOrDefault();
+            ColaboradorDto colaboradorDTO = null;
+
+            if (colaborador != null)
+            {
+                colaboradorDTO = await ConvertirColaboradorADTO(colaborador);
+            }
+
+            return colaboradorDTO;
+        }
+
 
         private async Task<ArticuloDto> ConvertirArticuloADto(Articulo articulo)
         {
@@ -150,6 +181,28 @@ namespace MicroservicioWiki.Logica
             categoriaDTO.Nombre = categoria.Nombre;
 
             return categoriaDTO;
+        }
+
+        private async Task<Colaborador> ConvertirColaboradorAEntidad(ColaboradorDto colaboradorDTO)
+        {
+            Colaborador colaborador = new Colaborador();
+            colaborador.IdColaborador = colaboradorDTO.IdColaborador;
+            colaborador.Nombre = colaboradorDTO.Nombre;
+            colaborador.Apellido = colaboradorDTO.Apellido;
+            colaborador.Email = colaboradorDTO.Email;
+
+            return colaborador;
+        }
+
+        private async Task<ColaboradorDto> ConvertirColaboradorADTO(Colaborador colaborador)
+        {
+            ColaboradorDto colaboradorDTO = new ColaboradorDto();
+            colaboradorDTO.IdColaborador = colaborador.IdColaborador;
+            colaboradorDTO.Nombre = colaborador.Nombre;
+            colaboradorDTO.Apellido = colaborador.Apellido;
+            colaboradorDTO.Email = colaborador.Email;
+
+            return colaboradorDTO;
         }
 
     }

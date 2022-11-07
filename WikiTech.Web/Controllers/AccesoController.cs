@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿//using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WikiTech.Entidades;
 using WikiTech.Logica;
@@ -30,9 +30,9 @@ namespace WikiTech.Web.Controllers
                 // variable de sesion guardada en cookie para usarse configure program.cs
                 HttpContext.Session.SetString("token", tokenString);
                 // para obtener el token usar esto
-                // HttpContext.Session.GetString("token");
+                //HttpContext.Session.GetString("token");
 
-                return Redirect("/Home/Index");
+                return Redirect("/Articulo/ListarArticulos");
             }
             else
             {
@@ -52,7 +52,7 @@ namespace WikiTech.Web.Controllers
             {
                 _IAccesoServicio.Registrarse(usuario);
 
-                return Redirect("/Home/Index");
+                return Redirect("/Articulo/ListarArticulos");
             }
             else
             {
