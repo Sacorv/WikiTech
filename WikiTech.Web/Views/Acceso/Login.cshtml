@@ -20,7 +20,14 @@
                     <span asp-validation-for="contrasenia"></span>
                 </div>
                 <div>
+                    
                     <input type="submit" value="Ingresar" class="btn btn-primary w-50" role="button" />
+                    @if(@ViewBag.mensaje != null){
+                    <div class="alert alert-danger" role="alert">
+                            @ViewBag.mensaje
+                    </div>
+                    
+                    }
                 </div>
             </form>
 

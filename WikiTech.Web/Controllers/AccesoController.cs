@@ -16,8 +16,9 @@ namespace WikiTech.Web.Controllers
             _IAccesoServicio = _accesoServicio;
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string mensaje)
         {
+            ViewBag.mensaje = mensaje;
             return View();
         }
 
@@ -26,17 +27,30 @@ namespace WikiTech.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 string tokenString = await _IAccesoServicio.LoginAsync(usuario);
-                // variable de sesion guardada en cookie para usarse configure program.cs
-                HttpContext.Session.SetString("token", tokenString);
-                // para obtener el token usar esto
-                //HttpContext.Session.GetString("token");
+                if (tokenString != "error")
+                {
+                    // variable de sesion guardada en cookie para usarse configure program.cs
+                    HttpContext.Session.SetString("token", tokenString);
+                    // para obtener el token usar esto
+                    //HttpContext.Session.GetString("token");
 
-                return Redirect("/Articulo/ListarArticulos");
+                    HttpContext.Session.SetString("email", usuario.email);
+
+                    return Redirect("/Articulo/ListarArticulos");
+                }
+                else
+                {
+
+                    ViewBag.mensaje = "Usuario y/o contraseña invalidos";
+                    return Redirect("/Acceso/Login");
+                }
             }
             else
             {
-                return View(usuario);
+                ViewBag.mensaje = "Usuario y/o contraseña invalidos";
+                return Redirect("/Acceso/Login");
             }
            
         }
@@ -45,6 +59,13 @@ namespace WikiTech.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("/Articulo/ListarArticulos");
+        }
+
         [HttpPost]
         public IActionResult Registrar(Usuario usuario)
         {

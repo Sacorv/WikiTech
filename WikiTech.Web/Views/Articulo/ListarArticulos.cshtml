@@ -6,7 +6,10 @@
 <div class="text-center">
     <h1 class="display-4 mb-3 mt-2">WikiTech</h1>
     <div class="w-50 m-auto">
-        <h4 class="display-6 fs-4 mb-3">Bienvenido a la wiki tecnológica!</h4>
+        @if (ViewBag.usuario != null)
+        {
+            <h4 class="display-6 fs-4 mb-3">Bienvenido/a @ViewBag.usuario a la wiki  tecnológica!</h4>
+            }
         <p>En WikiTech vas a poder crear tus propios artículos para compartir tus conocimientos con los demás colaboradores y usuarios</p>
     </div>
 </div>
@@ -27,7 +30,10 @@
                         @*<p>@articulo.Puntaje</p>
                         <p>@articulo.IdColaborador</p>
                         <p>@articulo.IdCategoria</p>*@
-                        @*<a href="/articulo/EliminarArticulo/@articulo.id" style="text-decoration:none;">Eliminar</a>*@
+                        @if(ViewBag.Eliminar){
+                            @*<a href="/articulo/EliminarArticulo/@articulo.id" style="text-decoration:none;">Eliminar</a>*@
+                        }
+                       
                     </div>
                 </div>
             </div>

@@ -11,10 +11,13 @@
         <h5 class="card-title">@Model.Titulo</h5>
         <p class="card-text">@Model.Contenido</p>
         <p class="card-text"><small class="text-muted">@Model.Fecha</small></p>
-        <div class="text-end">
-            <a href="#">Modificar</a>
+        @if (ViewBag.Eliminar)
+        {
+            <div class="text-end">
+                <a href="#">Modificar</a>
             <a href="/articulo/EliminarArticulo/@Model.id">Eliminar</a>
         </div>
+        }
     </div>
 </div>
 

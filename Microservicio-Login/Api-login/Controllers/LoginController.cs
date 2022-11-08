@@ -28,10 +28,18 @@ namespace Api_login.Controllers
         {
             return new
             {
-                code= 200,
+                code = 200,
                 message = "hola mundo"
             };
         }
+
+        /*[HttpGet("{email}")]
+        [Route("obtenerUser")]
+        public dynamic GetUserFullName(String email) 
+        {
+            Usuario usuario = _context.Usuarios.Find(email);
+            return usuario.Fullname;
+        }*/
 
         [HttpPost]
         [Route("registerUser")]
@@ -75,7 +83,7 @@ namespace Api_login.Controllers
                 {
                     success = false,
                     message = "fracaso",
-                    result = "Usuario o contraseña invalida"
+                    result = "error"
                 };
 
             }

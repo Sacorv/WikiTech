@@ -17,6 +17,17 @@ namespace WikiTech.Web.Controllers
 
         public async Task<IActionResult> ListarArticulos()
         {
+            
+            if(HttpContext.Session.GetString("token") != null)
+            {
+                ViewBag.Eliminar = true;
+                ViewBag.Token = HttpContext.Session.GetString("token");
+                ViewBag.usuario = HttpContext.Session.GetString("email");
+            }
+            else
+            {
+                ViewBag.Eliminar = false;
+            }
             ViewBag.Articulos = await _articuloServicio.ObtenerArticulos();
             
 
@@ -25,6 +36,14 @@ namespace WikiTech.Web.Controllers
 
         public async Task<IActionResult> VerArticulo(int id)
         {
+            if (HttpContext.Session.GetString("token") != null)
+            {
+                ViewBag.Eliminar = true;
+            }
+            else
+            {
+                ViewBag.Eliminar = false;
+            }
             Articulo articulo = await _articuloServicio.BuscarArticulo(id);
 
             return View(articulo);
@@ -32,10 +51,17 @@ namespace WikiTech.Web.Controllers
 
 
         public async Task<IActionResult> CrearArticulo()
-        {
-            List<Categoria> categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
 
-            return View(categorias);
+        {
+           // if (HttpContext.Session.GetString("token") != null)
+            //{
+                List<Categoria> categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
+
+                return View(categorias);
+            //}
+           
+
+               
         }
 
         [HttpPost]
