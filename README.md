@@ -20,13 +20,13 @@ La Wiki tiene un formato colaborativo.
 
 1. Clonar el repositorio desde https://github.com/Sacorv/WikiTech.git
 
-####Para el Microservicio Wiki
+#### Para el Microservicio Wiki
 
 2. Crear una Base de datos local SQL Server y ejecutar los scripts ubicados en [Database](https://github.com/Sacorv/WikiTech/tree/master/Database)
 3. Configurar en el context la [conexión de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Wiki/MicroservicioWiki.Data/Entidades/MicroservicioWikiContext.cs#L28) 
 4. Ejecutar el proyecto
 
-####Para el Microservicio Login
+#### Para el Microservicio Login
 
 2. Crear una Base de datos local SQL Server vacía
 3. Configurar en el archivo appSettings.json la [conexión de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Login/Api-login/appsettings.json#L16) 
