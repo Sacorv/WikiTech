@@ -1,4 +1,7 @@
-﻿@model List<WikiTech.Entidades.Categoria>
+﻿@using WikiTech.Entidades
+
+
+@model Articulo
 
 @{
 }
@@ -7,16 +10,23 @@
 <form class="row g-3" method="post" action="/articulo/CrearArticulo">
     <div class="col-md-6">
         <label for="Titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="Titulo" name="Titulo" autofocus>
+        <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" autofocus>
+        <span asp-validation-for="Titulo"></span>
     </div>
     <div class="col-md-3">
         <label for="Fecha" class="form-label">Fecha</label>
-        <input type="datetime" class="form-control" id="Fecha" name="Fecha">
+        <input type="datetime" class="form-control" id="Fecha" name="Fecha" asp-for="Fecha">
+        <span asp-validation-for="Fecha"></span>
     </div>
     <div class="col-12">
         <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
-        <textarea id="Contenido" name="Contenido" rows="6" cols="70">
-        </textarea>
+        <textarea id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido"></textarea>
+        <span asp-validation-for="Contenido"></span>
+    </div>
+    <div class="col-md-3">
+        <label for="Fecha" class="form-label">Puntuación</label>
+        <input type="datetime" class="form-control" id="Fecha" name="Puntaje" asp-for="Puntaje">
+        <span asp-validation-for="Puntaje"></span>
     </div>
     <div class="col-5">
         <label for="ImagenPrincipal" class="form-label">URL de Imagen</label>
@@ -24,9 +34,10 @@
     </div>
     
     <select class="form-select w-25" aria-label="Default select example" name="IdCategoria">
+        @*<span asp-validation-for="IdCategoria"></span>*@
         <option selected>Elegir categoria</option>
 
-        @foreach (var categoria in Model)
+        @foreach (var categoria in ViewBag.Categorias)
         {
             <option value="@categoria.idCategoria">@categoria.Nombre</option>
         }

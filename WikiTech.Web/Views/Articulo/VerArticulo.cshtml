@@ -3,18 +3,18 @@
 @{
 }
 
-<h1>@Model.Titulo</h1>
+<h1 class="display-4 fs-2 text-center mt-5 pb-2">@Model.Titulo</h1>
 
-<div class="card mb-3 w-75 text-center m-auto h-50">
-    <img src="@Model.ImagenPrincipal" class="card-img-top" alt="..." style="height:"450px">
+<div class="card mb-3 mt-4 text-center m-auto h-50"style="max-width: 50%;">
+    <img src="@Model.ImagenPrincipal" class="card-img-top" alt="..." style="height:300px; max-width: 100%;">
     <div class="card-body">
-        <h5 class="card-title">@Model.Titulo</h5>
-        <p class="card-text">@Model.Contenido</p>
-        <p class="card-text"><small class="text-muted">@Model.Fecha</small></p>
+        <h5 class="card-title mb-4 mt-4">@Model.Titulo</h5>
+        <p class="card-text mb-4">@Model.Contenido</p>
+        <a href="#" style="text-decoration:none" class="mb-4">Ver video</a>
+        <p class="card-text text-start"><small class="text-muted text-start">@Model.Fecha</small></p>
         @if (ViewBag.Eliminar)
         {
             <div class="text-end">
-                <a href="#">Modificar</a>
             <a href="/articulo/EliminarArticulo/@Model.id">Eliminar</a>
         </div>
         }

@@ -8,7 +8,7 @@
     <div class="w-50 m-auto">
         @if (ViewBag.usuario != null)
         {
-            <h4 class="display-6 fs-4 mb-3">Bienvenido/a @ViewBag.usuario a la wiki  tecnológica!</h4>
+            <h4 class="display-6 fs-4 mb-3">Bienvenido/a <span style="color:#6E85B7; font-weight:700">@ViewBag.usuario</span>  a la wiki  tecnológica!</h4>
             }
         <p>En WikiTech vas a poder crear tus propios artículos para compartir tus conocimientos con los demás colaboradores y usuarios</p>
     </div>
@@ -19,17 +19,15 @@
     @foreach (var articulo in ViewBag.Articulos)
     {
         <a href="/Articulo/VerArticulo/@articulo.id" style="text-decoration:none; color: black">
-            <div class="col">
-                <div class="card" style="max-width: 88%; height:335px">
-                    <img src="@articulo.ImagenPrincipal" class="card-img-top" alt="...">
+            <div class="col mb-3">
+                <div class="card" style="max-width: 88%; height:310px">
+                    <img src="@articulo.ImagenPrincipal" class="card-img-top" alt="..." style="height: 42%">
                     <div class="card-body">
-                        <input type="hidden" >@articulo.id
+                        <p hidden>@articulo.id</p>
                         <h5 class="card-title" style="white-space:nowrap;text-overflow: ellipsis;white-space: wrap;overflow: hidden;">@articulo.Titulo</h5>
                         <p class="card-text" style="white-space:nowrap;text-overflow: ellipsis;white-space: wrap;overflow: hidden;">@articulo.Contenido</p>
+                        <p>Puntuación: @articulo.Puntaje</p>
                         <p>@articulo.Fecha</p>
-                        @*<p>@articulo.Puntaje</p>
-                        <p>@articulo.IdColaborador</p>
-                        <p>@articulo.IdCategoria</p>*@
                         @if(ViewBag.Eliminar){
                             @*<a href="/articulo/EliminarArticulo/@articulo.id" style="text-decoration:none;">Eliminar</a>*@
                         }

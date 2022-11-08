@@ -53,27 +53,33 @@ namespace WikiTech.Web.Controllers
         public async Task<IActionResult> CrearArticulo()
 
         {
-           // if (HttpContext.Session.GetString("token") != null)
-            //{
-                List<Categoria> categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
+            ViewBag.Categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
 
-                return View(categorias);
-            //}
-           
-
-               
+            return View();
         }
+
 
         [HttpPost]
         public IActionResult CrearArticulo(Articulo articulo)
         {
-            var sesion = HttpContext;
+            if (ModelState.IsValid)
+            {
+                var sesion = HttpContext;
+
+                _articuloServicio.GuardarArticulo(articulo, sesion);
+
+                Thread.Sleep(1300);
+
+                TempData["creado"] = "Artículo creado con éxito";
+
+                return RedirectToAction("ListarArticulos");
+            }
+            else
+            {
+                return View();
+            }
+
             
-            _articuloServicio.GuardarArticulo(articulo, sesion);
-
-            Thread.Sleep(1300);
-
-            return RedirectToAction("ListarArticulos");
         }
 
 

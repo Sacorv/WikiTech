@@ -22,25 +22,7 @@ namespace Api_login.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet]
-        [Route("mensaje")]
-        public dynamic mensaje()
-        {
-            return new
-            {
-                code = 200,
-                message = "hola mundo"
-            };
-        }
-
-        /*[HttpGet("{email}")]
-        [Route("obtenerUser")]
-        public dynamic GetUserFullName(String email) 
-        {
-            Usuario usuario = _context.Usuarios.Find(email);
-            return usuario.Fullname;
-        }*/
-
+        
         [HttpPost]
         [Route("registerUser")]
         public dynamic registerUser([FromBody] Object optData)

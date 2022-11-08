@@ -80,7 +80,7 @@ namespace WikiTech.Logica
 
         public async Task<bool> GuardarArticulo(Articulo articulo, HttpContext sesion)
         {
-            string email = sesion.Session.GetString("usuario");
+            string email = sesion.Session.GetString("email");
             string token = sesion.Session.GetString("token");
 
             articulo.IdColaborador = await BuscarColaboradorPorEmail(email, sesion);
