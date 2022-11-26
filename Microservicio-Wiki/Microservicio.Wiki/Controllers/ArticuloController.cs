@@ -95,7 +95,7 @@ namespace Microservicio.Wiki.Controllers
             return await _IArticuloServicio.ObtenerCategorias(); ;
         }
 
-        [Authorize]
+        
         [HttpPost("colaborador")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ColaboradorDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(bool))]

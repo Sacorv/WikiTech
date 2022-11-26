@@ -36,7 +36,7 @@ namespace WikiTech.Logica
         {
             List<Articulo> listaArticulos = new List<Articulo>();
 
-            var endpoint = "https://localhost:7164/api/articulo";
+            var endpoint = "https://microserviciowiki.azurewebsites.net/api/articulo";
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true};
 
             using (var httpClient = new HttpClient())
@@ -56,7 +56,7 @@ namespace WikiTech.Logica
 
         public async Task<Articulo> BuscarArticulo(int id)
         {
-            string endpoint = $"https://localhost:7164/api/articulo/{id}";
+            string endpoint = $"https://microserviciowiki.azurewebsites.net/api/articulo/{id}";
             Articulo buscado = null;
 
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
@@ -86,7 +86,7 @@ namespace WikiTech.Logica
             articulo.IdColaborador = await BuscarColaboradorPorEmail(email, sesion);
 
             bool guardado = false;
-            string endpoint = "https://localhost:7164/api/articulo";
+            string endpoint = "https://microserviciowiki.azurewebsites.net/api/articulo";
 
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true};
 
@@ -110,7 +110,7 @@ namespace WikiTech.Logica
 
             if(BuscarArticulo(id) != null)
             {
-                string endpoint = $"https://localhost:7164/api/articulo/{id}";
+                string endpoint = $"https://microserviciowiki.azurewebsites.net/api/articulo/{id}";
 
                 JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
@@ -133,7 +133,7 @@ namespace WikiTech.Logica
 
             List<Categoria> categorias = new List<Categoria>();
 
-            var endpoint = "https://localhost:7164/api/articulo/categorias";
+            var endpoint = "https://microserviciowiki.azurewebsites.net/api/articulo/categorias";
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
             using (var httpClient = new HttpClient())
@@ -155,7 +155,7 @@ namespace WikiTech.Logica
         {
             string token = sesion.Session.GetString("token");
 
-            string endpoint = $"https://localhost:7164/api/articulo/colaborador/{email}";
+            string endpoint = $"https://microserviciowiki.azurewebsites.net/api/articulo/colaborador/{email}";
             int buscado = 0;
 
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };

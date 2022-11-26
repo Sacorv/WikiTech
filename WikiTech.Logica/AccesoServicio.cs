@@ -23,7 +23,7 @@ namespace WikiTech.Logica
         public async Task<string> LoginAsync(Usuario usuario)
         {   
             //url donde tenemos la api con el endpoint
-            string urlApi = $"https://localhost:7294/login/loginsesion";
+            string urlApi = $"https://microservicioslogin.azurewebsites.net/login/loginsesion";
 
             // httpClient para hacer peticiones
             using (var httpClient = new HttpClient())
@@ -60,7 +60,7 @@ namespace WikiTech.Logica
         {
             int statusCode = 0;
 
-            string urlApi = $"https://localhost:7294/login/registeruser";
+            string urlApi = $"https://microservicioslogin.azurewebsites.net/login/registeruser";
 
             using (var httpClient = new HttpClient())
             {
@@ -93,7 +93,7 @@ namespace WikiTech.Logica
             colaborador.Apellido = usuario.apellido;
             colaborador.Email = usuario.email;
 
-            string endpoint = "https://localhost:7164/api/articulo/colaborador";
+            string endpoint = "https://microserviciowiki.azurewebsites.net/api/articulo/colaborador";
 
             JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
