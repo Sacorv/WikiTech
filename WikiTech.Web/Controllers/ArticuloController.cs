@@ -68,7 +68,7 @@ namespace WikiTech.Web.Controllers
 
                 _articuloServicio.GuardarArticulo(articulo, sesion);
 
-                Thread.Sleep(1300);
+                Thread.Sleep(1500);
 
                 TempData["creado"] = "Artículo creado con éxito";
 
@@ -88,7 +88,7 @@ namespace WikiTech.Web.Controllers
             var sesion = HttpContext;
             _articuloServicio.EliminarArticulo(id, sesion);
 
-            Thread.Sleep(400);
+            Thread.Sleep(800);
 
             return RedirectToAction("ListarArticulos");
         }
