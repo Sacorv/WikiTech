@@ -13,11 +13,6 @@
         <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" autofocus>
         <span asp-validation-for="Titulo"></span>
     </div>
-    <div class="col-md-3">
-        <label for="Fecha" class="form-label">Fecha</label>
-        <input type="text" class="form-control" name="Fecha" value="@ViewBag.Fecha" disabled>
-        @*<span asp-validation-for="Fecha"></span>*@
-    </div>
     <div class="col-12">
         <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
         <textarea id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido"></textarea>
@@ -33,8 +28,7 @@
         <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal">
     </div>
     
-    <select class="form-select w-25" aria-label="Default select example" name="IdCategoria">
-        @*<span asp-validation-for="IdCategoria"></span>*@
+    <select class="form-select w-25 ps-2" aria-label="Default select example" name="IdCategoria" style=" max-width: 300px;max-height: 40px;margin-top: 48px;">
         <option selected>Elegir categoria</option>
 
         @foreach (Categoria categoria in ViewBag.Categorias)
