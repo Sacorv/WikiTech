@@ -1,19 +1,19 @@
 ##  WikiTech
 
-WikiTech es una aplicaci髇 web basada en una wiki de art韈ulos relacionados al 醡bito tecnol骻ico, donde los usuarios pueden ver los art韈ulos, generar nuevos o eliminarlos. 
+WikiTech es una aplicaci贸n web basada en una wiki de art铆culos relacionados al 谩mbito tecnol贸gico, donde los usuarios pueden ver los art铆culos, generar nuevos o eliminarlos. 
 
-La App consume el [Microservicio-Wiki](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Wiki) para obtener la data de los art韈ulos y realizar las modificaciones necesarias. Adem醩, para el registro y autenticaci髇 de usuarios, consume el [Microservicio-Login](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Login).
+La App consume el [Microservicio-Wiki](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Wiki) para obtener la data de los art铆culos y realizar las modificaciones necesarias. Adem谩s, para el registro y autenticaci贸n de usuarios, consume el [Microservicio-Login](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Login).
 
 ## Hosting Microsoft Azure
 
-La aplicaci髇 web y los microservicios se encuentran publicados en la nube de Microsoft Azure. A continuaci髇, se listan las URLs para probar cada uno de ellos:
-* Aplicaci髇 Web - **WikiTech**: 
+La aplicaci贸n web y los microservicios se encuentran publicados en la nube de Microsoft Azure. A continuaci贸n, se listan las URLs para probar cada uno de ellos:
+* Aplicaci贸n Web - **WikiTech**: https://wikitech.azurewebsites.net/
 
 * Microservicio Wiki: https://microserviciowiki.azurewebsites.net/api/articulo
 
 * Microservicio Login: https://microservicioslogin.azurewebsites.net/login/loginsesion
 
-### Tecnolog韆s
+### Tecnolog铆as
 
 - ASP.NET 6
 - Entity Framework
@@ -30,16 +30,16 @@ La aplicaci髇 web y los microservicios se encuentran publicados en la nube de Mi
 ##### Para el Microservicio Wiki
 
 2. Crear una Base de datos local SQL Server y ejecutar los scripts ubicados en [Database](https://github.com/Sacorv/WikiTech/tree/master/Database)
-3. Configurar en el context la [conexi髇 de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Wiki/MicroservicioWiki.Data/Entidades/MicroservicioWikiContext.cs#L28) 
+3. Configurar en el context la [conexi贸n de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Wiki/MicroservicioWiki.Data/Entidades/MicroservicioWikiContext.cs#L28) 
 4. Ejecutar el proyecto
 
 ##### Para el Microservicio Login
 
-2. Crear una Base de datos local SQL Server vac韆
-3. Configurar en el archivo appSettings.json la [conexi髇 de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Login/Api-login/appsettings.json#L16) 
+2. Crear una Base de datos local SQL Server vac铆a
+3. Configurar en el archivo appSettings.json la [conexi贸n de la DB creada](https://github.com/Sacorv/WikiTech/blob/master/Microservicio-Login/Api-login/appsettings.json#L16) 
 4. Ejecutar el proyecto
 
-#### Collection de Postman
+### Collection de Postman
 
 Se disponibilizan los links de las collections de cada microservicio: 
 
