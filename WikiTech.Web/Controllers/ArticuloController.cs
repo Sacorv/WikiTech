@@ -53,7 +53,10 @@ namespace WikiTech.Web.Controllers
         public async Task<IActionResult> CrearArticulo()
 
         {
+            DateTime localDate = DateTime.Now;
+
             ViewBag.Categorias = await _articuloServicio.ObtenerCategorias(HttpContext);
+            ViewBag.Fecha = localDate;
 
             return View();
         }
@@ -64,22 +67,21 @@ namespace WikiTech.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var sesion = HttpContext;
+                _articuloServicio.GuardarArticulo(articulo, HttpContext);
 
-                _articuloServicio.GuardarArticulo(articulo, sesion);
-
-                Thread.Sleep(1500);
+                Thread.Sleep(3000);
 
                 TempData["creado"] = "Artículo creado con éxito";
 
                 return RedirectToAction("ListarArticulos");
+
+                //return Content("la fecha es: " + localDate);
             }
             else
             {
-                return View();
+                DateTime localDate = DateTime.Now;
+                return Content("Error de validación" + localDate);
             }
-
-            
         }
 
 

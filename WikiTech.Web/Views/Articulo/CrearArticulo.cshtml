@@ -15,8 +15,8 @@
     </div>
     <div class="col-md-3">
         <label for="Fecha" class="form-label">Fecha</label>
-        <input type="datetime" class="form-control" id="Fecha" name="Fecha" asp-for="Fecha">
-        <span asp-validation-for="Fecha"></span>
+        <input type="text" class="form-control" name="Fecha" value="@ViewBag.Fecha" disabled>
+        @*<span asp-validation-for="Fecha"></span>*@
     </div>
     <div class="col-12">
         <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
@@ -37,7 +37,7 @@
         @*<span asp-validation-for="IdCategoria"></span>*@
         <option selected>Elegir categoria</option>
 
-        @foreach (var categoria in ViewBag.Categorias)
+        @foreach (Categoria categoria in ViewBag.Categorias)
         {
             <option value="@categoria.idCategoria">@categoria.Nombre</option>
         }

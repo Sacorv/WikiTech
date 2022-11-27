@@ -85,6 +85,9 @@ namespace WikiTech.Logica
 
             articulo.IdColaborador = await BuscarColaboradorPorEmail(email, sesion);
 
+            DateTime localDate = DateTime.Now;
+            articulo.Fecha = localDate;
+
             bool guardado = false;
             string endpoint = "https://microserviciowiki.azurewebsites.net/api/articulo";
 
