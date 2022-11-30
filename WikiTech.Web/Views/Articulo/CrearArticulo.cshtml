@@ -41,4 +41,8 @@
         <a class="btn btn-secondary btn-lg" style="width:180px" href="/articulo/ListarArticulos" role="button">Volver</a>
         <button type="submit" class="btn btn-primary btn-lg">Guardar artículo</button>
     </div>
+    @if (@TempData["nocreado"]!=null){
+        <div class="alert alert-danger w-50 m-auto">@TempData["nocreado"]</div>
+    }
+    
 </form>

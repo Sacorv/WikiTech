@@ -14,6 +14,10 @@
     </div>
 </div>
 
+@if (@TempData["creado"] != null)
+{
+    <div class="alert alert-success w-50 m-auto">@TempData["creado"]</div>
+}
  
 <div class="row row-cols-1 row-cols-md-4 g-4 mt-5" style="margin-left: 38px">
     @foreach (var articulo in ViewBag.Articulos)

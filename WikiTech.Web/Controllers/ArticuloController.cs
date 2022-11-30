@@ -73,14 +73,13 @@ namespace WikiTech.Web.Controllers
 
                 TempData["creado"] = "Artículo creado con éxito";
 
-                return RedirectToAction("ListarArticulos");
-
-                //return Content("la fecha es: " + localDate);
+                return RedirectToAction("ListarArticulos");                
             }
             else
             {
-                DateTime localDate = DateTime.Now;
-                return Content("Error de validación" + localDate);
+                TempData["nocreado"] = "Error en la cración del artículo";
+            
+                return RedirectToAction("CrearArticulo");
             }
         }
 
