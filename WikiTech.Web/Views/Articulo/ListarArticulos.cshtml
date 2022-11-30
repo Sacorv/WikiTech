@@ -5,7 +5,7 @@
 
 <div class="text-center">
     <h1 class="display-4 mb-3 mt-2">WikiTech</h1>
-    <div class="w-50 m-auto">
+    <div class="w-75 m-auto">
         @if (ViewBag.usuario != null)
         {
             <h4 class="display-6 fs-4 mb-3">Bienvenido/a <span style="color:#6E85B7; font-weight:700">@ViewBag.usuario</span>  a la wiki  tecnológica!</h4>
@@ -15,7 +15,7 @@
 </div>
 
  
-<div class="row row-cols-1 row-cols-md-4 g-4 mt-5">
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-5" style="margin-left: 38px">
     @foreach (var articulo in ViewBag.Articulos)
     {
         <a href="/Articulo/VerArticulo/@articulo.id" style="text-decoration:none; color: black">

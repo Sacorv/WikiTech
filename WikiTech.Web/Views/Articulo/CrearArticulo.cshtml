@@ -7,28 +7,28 @@
 }
 <h1>Crear un nuevo artículo</h1>
 
-<form class="row g-3" method="post" action="/articulo/CrearArticulo">
+<form class="row g-3 m-auto" method="post" action="/articulo/CrearArticulo">
     <div class="col-md-6">
         <label for="Titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" autofocus>
+        <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" style="max-width: 98%" autofocus>
         <span asp-validation-for="Titulo"></span>
     </div>
     <div class="col-12">
         <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
-        <textarea id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido"></textarea>
+        <textarea style="max-width: 98%" id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido"></textarea>
         <span asp-validation-for="Contenido"></span>
     </div>
     <div class="col-md-3">
         <label for="Fecha" class="form-label">Puntuación</label>
-        <input type="datetime" class="form-control" id="Fecha" name="Puntaje" asp-for="Puntaje">
+        <input type="datetime" class="form-control" id="Fecha" name="Puntaje" asp-for="Puntaje" style="max-width: 98%">
         <span asp-validation-for="Puntaje"></span>
     </div>
-    <div class="col-5">
+    <div class="col-5" style="max-width: 95%;">
         <label for="ImagenPrincipal" class="form-label">URL de Imagen</label>
-        <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal">
+        <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal" style="max-width: 98%">
     </div>
     
-    <select class="form-select w-25 ps-2" aria-label="Default select example" name="IdCategoria" style=" max-width: 300px;max-height: 40px;margin-top: 48px;">
+    <select class="form-select ps-2" aria-label="Default select example" name="IdCategoria" style=" max-width: 30%;max-height: 40px;margin-top: 50px;">
         <option selected>Elegir categoria</option>
 
         @foreach (Categoria categoria in ViewBag.Categorias)
@@ -37,7 +37,7 @@
         }
     </select>
     
-    <div class="col-12">
+    <div class="col-12" style="margin-top: 35px;">
         <a class="btn btn-secondary btn-lg" style="width:180px" href="/articulo/ListarArticulos" role="button">Volver</a>
         <button type="submit" class="btn btn-primary btn-lg">Guardar artículo</button>
     </div>
