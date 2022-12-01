@@ -8,23 +8,20 @@
 <h1 class="text-center">Crear un nuevo artículo</h1>
 <div class="card-body mb-4">
     <form class="row g-3 m-auto w-75 justify-content-center" method="post" action="/articulo/CrearArticulo">
-        <div class="col-md-7">
-            <label for="Titulo" class="form-label"></label>
+        <div class="col-md-7 mb-0">
             <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" style="max-width: 98%" placeholder="Título" autofocus>
             <span asp-validation-for="Titulo"></span>
         </div>
         <div class="col-md-12 text-center">
-            <p><label for="Contenido" class="form-label"></label></p>
             <textarea style="max-width: 98%; border: 1px solid #ced4da;" id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido" placeholder="Contenido del artículo"></textarea>
             <span asp-validation-for="Contenido"></span>
         </div>
         <div class="col-md-2">
-            <label for="Puntaje" class="form-label"></label>
             <input type="number" class="form-control" id="Puntaje" name="Puntaje" asp-for="Puntaje" style="max-width: 98%" placeholder="Puntuación">
             <span asp-validation-for="Puntaje"></span>
         </div>
         <div class="col-md-5">
-            <select class="form-select ps-2" aria-label="Default select example" name="IdCategoria" style="max-height: 40px;margin-top: 23px;color:#858383">
+            <select class="form-select ps-2" aria-label="Default select example" name="IdCategoria" style="color:#858383">
                 <option selected>Elegir categoria</option>
 
                 @foreach (Categoria categoria in ViewBag.Categorias)
@@ -35,13 +32,12 @@
         </div>
         
         <div class="col-md-7">
-            <label for="ImagenPrincipal" class="form-label"></label>
             <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal" style="max-width: 100%" placeholder="URL de Imagen">
         </div>
 
         <div class="col-md-12 text-center" style="margin-top: 35px;">
-            <a class="btn btn-secondary btn-lg" style="width:266px" href="/articulo/ListarArticulos" role="button">Volver</a>
-            <button type="submit" class="btn btn-primary btn-lg" style="width:266px">Guardar artículo</button>
+            <a class="btn btn-secondary btn-lg mb-2" style="width:266px" href="/articulo/ListarArticulos" role="button">Volver</a>
+            <button type="submit" class="btn btn-primary btn-lg mb-2" style="width:266px">Guardar artículo</button>
         </div>
         @if (@TempData["nocreado"] != null)
         {

@@ -77,7 +77,7 @@ namespace WikiTech.Web.Controllers
             }
             else
             {
-                TempData["nocreado"] = "Error en la cración del artículo";
+                TempData["nocreado"] = "Error en la creación del artículo";
             
                 return RedirectToAction("CrearArticulo");
             }
