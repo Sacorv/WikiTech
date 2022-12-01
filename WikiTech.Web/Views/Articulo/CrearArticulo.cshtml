@@ -5,44 +5,48 @@
 
 @{
 }
-<h1>Crear un nuevo artículo</h1>
+<h1 class="text-center">Crear un nuevo artículo</h1>
+<div class="card-body mb-4">
+    <form class="row g-3 m-auto w-75 justify-content-center" method="post" action="/articulo/CrearArticulo">
+        <div class="col-md-7">
+            <label for="Titulo" class="form-label"></label>
+            <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" style="max-width: 98%" placeholder="Título" autofocus>
+            <span asp-validation-for="Titulo"></span>
+        </div>
+        <div class="col-md-12 text-center">
+            <p><label for="Contenido" class="form-label"></label></p>
+            <textarea style="max-width: 98%; border: 1px solid #ced4da;" id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido" placeholder="Contenido del artículo"></textarea>
+            <span asp-validation-for="Contenido"></span>
+        </div>
+        <div class="col-md-2">
+            <label for="Puntaje" class="form-label"></label>
+            <input type="number" class="form-control" id="Puntaje" name="Puntaje" asp-for="Puntaje" style="max-width: 98%" placeholder="Puntuación">
+            <span asp-validation-for="Puntaje"></span>
+        </div>
+        <div class="col-md-5">
+            <select class="form-select ps-2" aria-label="Default select example" name="IdCategoria" style="max-height: 40px;margin-top: 23px;color:#858383">
+                <option selected>Elegir categoria</option>
 
-<form class="row g-3 m-auto" method="post" action="/articulo/CrearArticulo">
-    <div class="col-md-6">
-        <label for="Titulo" class="form-label">Título</label>
-        <input type="text" class="form-control" id="Titulo" name="Titulo" asp-for="Titulo" style="max-width: 98%" autofocus>
-        <span asp-validation-for="Titulo"></span>
-    </div>
-    <div class="col-12">
-        <p><label for="Contenido" class="form-label">Contenido del artículo</label></p>
-        <textarea style="max-width: 98%" id="Contenido" name="Contenido" rows="6" cols="70" asp-for="Contenido"></textarea>
-        <span asp-validation-for="Contenido"></span>
-    </div>
-    <div class="col-md-3">
-        <label for="Fecha" class="form-label">Puntuación</label>
-        <input type="datetime" class="form-control" id="Fecha" name="Puntaje" asp-for="Puntaje" style="max-width: 98%">
-        <span asp-validation-for="Puntaje"></span>
-    </div>
-    <div class="col-5" style="max-width: 95%;">
-        <label for="ImagenPrincipal" class="form-label">URL de Imagen</label>
-        <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal" style="max-width: 98%">
-    </div>
-    
-    <select class="form-select ps-2" aria-label="Default select example" name="IdCategoria" style=" max-width: 30%;max-height: 40px;margin-top: 50px;">
-        <option selected>Elegir categoria</option>
+                @foreach (Categoria categoria in ViewBag.Categorias)
+                {
+                    <option value="@categoria.idCategoria">@categoria.Nombre</option>
+                }
+            </select>
+        </div>
+        
+        <div class="col-md-7">
+            <label for="ImagenPrincipal" class="form-label"></label>
+            <input type="text" class="form-control" id="ImagenPrincipal" name="ImagenPrincipal" style="max-width: 100%" placeholder="URL de Imagen">
+        </div>
 
-        @foreach (Categoria categoria in ViewBag.Categorias)
+        <div class="col-md-12 text-center" style="margin-top: 35px;">
+            <a class="btn btn-secondary btn-lg" style="width:266px" href="/articulo/ListarArticulos" role="button">Volver</a>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:266px">Guardar artículo</button>
+        </div>
+        @if (@TempData["nocreado"] != null)
         {
-            <option value="@categoria.idCategoria">@categoria.Nombre</option>
+            <div class="alert alert-danger w-50 m-auto mt-3 text-center">@TempData["nocreado"]</div>
         }
-    </select>
-    
-    <div class="col-12" style="margin-top: 35px;">
-        <a class="btn btn-secondary btn-lg" style="width:180px" href="/articulo/ListarArticulos" role="button">Volver</a>
-        <button type="submit" class="btn btn-primary btn-lg">Guardar artículo</button>
-    </div>
-    @if (@TempData["nocreado"]!=null){
-        <div class="alert alert-danger w-50 m-auto">@TempData["nocreado"]</div>
-    }
-    
-</form>
+
+    </form>
+</div>

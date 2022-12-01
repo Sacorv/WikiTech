@@ -9,24 +9,20 @@
         </div>
         <div class="card-body mb-4 mt-4">
             <form method="post" action="/Acceso/Registrar">
-                <div class="mb-4">
-                    Usuario
-                    <input type="text" name="email" asp-for="email" />
+                <div class="mb-4"> 
+                    <input type="text" name="email" asp-for="email" placeholder="Email" class="w-50 pt-1 pb-1 ps-2"/>
                     <span asp-validation-for="email"></span>
                 </div>
                 <div class="mb-4">
-                    Nombre
-                    <input type="text" name="nombre" asp-for="nombre" />
+                    <input type="text" name="nombre" asp-for="nombre" placeholder="Nombre" class="w-50 pt-1 pb-1 ps-2" />
                     <span asp-validation-for="nombre"></span>
                 </div>
                 <div class="mb-4">
-                    Apellido
-                    <input type="text" name="apellido" asp-for="apellido" />
+                    <input type="text" name="apellido" asp-for="apellido" placeholder="Apellido" class="w-50 pt-1 pb-1 ps-2" />
                     <span asp-validation-for="apellido"></span>
                 </div>
                 <div class="mb-4 pb-3">
-                    Contraseña
-                    <input type="password" name="contrasenia" asp-for="contrasenia" />
+                    <input type="password" name="contrasenia" asp-for="contrasenia" placeholder="Contraseña" class="w-50 pt-1 pb-1 ps-2" />
                     <span asp-validation-for="contrasenia"></span>
                 </div>
                 <div>
