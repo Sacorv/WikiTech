@@ -4,14 +4,15 @@ WikiTech es una aplicación web basada en una wiki de artículos relacionados al
 
 La App consume el [Microservicio-Wiki](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Wiki) para obtener la data de los artículos y realizar las modificaciones necesarias. Además, para el registro y autenticación de usuarios, consume el [Microservicio-Login](https://github.com/Sacorv/WikiTech/tree/master/Microservicio-Login).
 
-## Hosting Microsoft Azure
+## Hosting
 
-La aplicación web y los microservicios se encuentran publicados en la nube de Microsoft Azure. A continuación, se listan las URLs para probar cada uno de ellos:
-* Aplicación Web - **WikiTech**: https://wikitech.azurewebsites.net/
+La aplicación web y los microservicios se encuentran publicados en la nube de Somee. A continuación, se listan las URLs para probar cada uno de ellos:
 
-* Microservicio Wiki: https://microserviciowiki.azurewebsites.net/api/articulo
+* Aplicación Web - **WikiTech**: http://www.wikitech.somee.com/
 
-* Microservicio Login: https://microservicioslogin.azurewebsites.net/login/loginsesion
+* Microservicio Wiki: http://microserviciowiki.somee.com/api/articulo
+
+* Microservicio Login: http://www.microserviciologin.somee.com/login/loginsesion
 
 ### Tecnologías
 
